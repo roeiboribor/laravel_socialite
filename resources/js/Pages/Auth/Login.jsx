@@ -113,7 +113,7 @@ export default function Login({ status, canResetPassword }) {
                     </span>
                     <div className="flex items-center justify-center">
                         {/* --- GITHUB --- */}
-                        <a
+                        {/* <a
                             href={route("provider.redirect", {
                                 provider: "github",
                             })}
@@ -133,7 +133,7 @@ export default function Login({ status, canResetPassword }) {
                                 />
                             </svg>
                             Sign in with Github
-                        </a>
+                        </a> */}
                         {/* --- GOOGLE --- */}
                         <a
                             href={route("provider.redirect", {
