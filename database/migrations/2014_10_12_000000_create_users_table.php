@@ -21,7 +21,7 @@ return new class extends Migration
             // Laravel Socialite
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
-            $table->string('provider_token')->nullable();
+            $table->longText('provider_token')->nullable();
             $table->timestamps();
         });
     }
