@@ -16,8 +16,8 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
-Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
+Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect'])->name('provider.redirect');
+Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])->name('provider.callback');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
