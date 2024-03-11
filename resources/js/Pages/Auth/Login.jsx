@@ -38,84 +38,82 @@ export default function Login({ with_errors, status, canResetPassword }) {
                 </div>
             )}
 
-            <div className="divide-y-2 divide-dashed">
-                <form onSubmit={submit} className="mb-8">
-                    <div>
-                        <InputLabel htmlFor="email" value="Email" />
+            {/* <div className="divide-y-2 divide-dashed"> */}
+            <form onSubmit={submit} className="mb-8 hidden">
+                <div>
+                    <InputLabel htmlFor="email" value="Email" />
 
-                        <TextInput
-                            id="email"
-                            type="email"
-                            name="email"
-                            value={data.email}
-                            className="mt-1 block w-full"
-                            autoComplete="username"
-                            isFocused={true}
-                            onChange={(e) => setData("email", e.target.value)}
-                        />
+                    <TextInput
+                        id="email"
+                        type="email"
+                        name="email"
+                        value={data.email}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        isFocused={true}
+                        onChange={(e) => setData("email", e.target.value)}
+                    />
 
-                        <InputError message={errors.email} className="mt-2" />
-                    </div>
+                    <InputError message={errors.email} className="mt-2" />
+                </div>
 
-                    <div className="mt-4">
-                        <InputLabel htmlFor="password" value="Password" />
+                <div className="mt-4">
+                    <InputLabel htmlFor="password" value="Password" />
 
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            value={data.password}
-                            className="mt-1 block w-full"
-                            autoComplete="current-password"
+                    <TextInput
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        className="mt-1 block w-full"
+                        autoComplete="current-password"
+                        onChange={(e) => setData("password", e.target.value)}
+                    />
+
+                    <InputError message={errors.password} className="mt-2" />
+                </div>
+
+                <div className="block mt-4">
+                    <label className="flex items-center">
+                        <Checkbox
+                            name="remember"
+                            checked={data.remember}
                             onChange={(e) =>
-                                setData("password", e.target.value)
+                                setData("remember", e.target.checked)
                             }
                         />
+                        <span className="ms-2 text-sm text-gray-600">
+                            Remember me
+                        </span>
+                    </label>
+                </div>
 
-                        <InputError
-                            message={errors.password}
-                            className="mt-2"
-                        />
-                    </div>
+                <div className="flex items-center justify-end mt-4">
+                    {canResetPassword && (
+                        <Link
+                            href={route("password.request")}
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            Forgot your password?
+                        </Link>
+                    )}
 
-                    <div className="block mt-4">
-                        <label className="flex items-center">
-                            <Checkbox
-                                name="remember"
-                                checked={data.remember}
-                                onChange={(e) =>
-                                    setData("remember", e.target.checked)
-                                }
-                            />
-                            <span className="ms-2 text-sm text-gray-600">
-                                Remember me
-                            </span>
-                        </label>
-                    </div>
+                    <PrimaryButton className="ms-4" disabled={processing}>
+                        Log in
+                    </PrimaryButton>
+                </div>
+            </form>
 
-                    <div className="flex items-center justify-end mt-4">
-                        {canResetPassword && (
-                            <Link
-                                href={route("password.request")}
-                                className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            >
-                                Forgot your password?
-                            </Link>
-                        )}
-
-                        <PrimaryButton className="ms-4" disabled={processing}>
-                            Log in
-                        </PrimaryButton>
-                    </div>
-                </form>
-
-                <div className="relative pt-8">
-                    <span className="absolute text-sm -top-3 left-1/2 -translate-x-1/2 bg-white px-2 py-1">
-                        OR
-                    </span>
-                    <div className="flex items-center justify-center">
-                        {/* --- GITHUB --- */}
-                        {/* <a
+            <div className="relative py-4">
+                <span className="hidden absolute text-sm -top-3 left-1/2 -translate-x-1/2 bg-white px-2 py-1">
+                    OR
+                </span>
+                <h2 class="text-center text-2xl upper font-extrabold dark:text-white mb-8">
+                    Login to CV Parser
+                </h2>
+                <div className="flex items-center justify-center space-x-3 mb-8">
+                    {/* --- GITHUB --- */}
+                    {/* <a
                             href={route("provider.redirect", {
                                 provider: "github",
                             })}
@@ -136,51 +134,62 @@ export default function Login({ with_errors, status, canResetPassword }) {
                             </svg>
                             Sign in with Github
                         </a> */}
-                        {/* --- GOOGLE --- */}
-                        <a
-                            href={route("provider.redirect", {
-                                provider: "google",
-                            })}
-                            className="text-white bg-[#CD5C5C] hover:bg-[#CD5C5C]/90 focus:ring-4 focus:outline-none focus:ring-[#CD5C5C]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#CD5C5C]/55 me-2 mb-2"
+                    {/* --- GOOGLE --- */}
+                    <a
+                        href={route("provider.redirect", {
+                            provider: "google",
+                        })}
+                        className="text-white bg-[#CD5C5C] hover:bg-[#CD5C5C]/90 focus:ring-4 focus:outline-none focus:ring-[#CD5C5C]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#CD5C5C]/55"
+                    >
+                        <svg
+                            className="w-4 h-4 me-3"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 18 19"
                         >
-                            <svg
-                                className="w-4 h-4"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 18 19"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </a>
+                            <path
+                                fillRule="evenodd"
+                                d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                        GOOGLE
+                    </a>
 
-                        <a
-                            href={route("provider.redirect", {
-                                provider: "facebook",
-                            })}
-                            className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
+                    <span>OR</span>
+
+                    <a
+                        href={route("provider.redirect", {
+                            provider: "facebook",
+                        })}
+                        className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55"
+                    >
+                        <svg
+                            className="w-4 h-4 me-3"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 8 19"
                         >
-                            <svg
-                                className="w-4 h-4"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 8 19"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </a>
-                    </div>
+                            <path
+                                fillRule="evenodd"
+                                d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                        FACEBOOK
+                    </a>
+                </div>
+                <div>
+                    <p className="text-xs text-gray-400">
+                        By logging in, I agree to the Privacy Policy and consent
+                        to the collection, storage and use of my personal data
+                        as described in that policy.
+                    </p>
                 </div>
             </div>
+            {/* </div> */}
         </GuestLayout>
     );
 }

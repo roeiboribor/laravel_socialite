@@ -19,13 +19,13 @@ class ProviderController extends Controller
 
     public function callback($provider)
     {
-        //? GITHUB DOESN'T HAVE EMAIL
-        $provider = strtolower($provider);
-
-        $userSocialite = Socialite::driver($provider)->user();
-        $hasUser = User::where('email', $userSocialite->getEmail())->exists();
-
         try {
+            //? GITHUB DOESN'T HAVE EMAIL
+            $provider = strtolower($provider);
+
+            $userSocialite = Socialite::driver($provider)->user();
+            $hasUser = User::where('email', $userSocialite->getEmail())->exists();
+
             if ($hasUser) {
                 return Inertia::render('Auth/Login', [
                     'with_errors' => [
