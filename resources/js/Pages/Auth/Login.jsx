@@ -16,7 +16,6 @@ export default function Login({ with_errors, status, canResetPassword }) {
 
     useEffect(() => {
         console.log(with_errors);
-        console.log(errors);
         return () => {
             reset("password");
         };
@@ -108,7 +107,7 @@ export default function Login({ with_errors, status, canResetPassword }) {
                 <span className="hidden absolute text-sm -top-3 left-1/2 -translate-x-1/2 bg-white px-2 py-1">
                     OR
                 </span>
-                <h2 class="text-center text-2xl upper font-extrabold dark:text-white mb-8">
+                <h2 className="text-center text-2xl upper font-extrabold dark:text-white mb-8">
                     Login to CV Parser
                 </h2>
                 <div className="flex items-center justify-center space-x-3 mb-8">
@@ -183,9 +182,16 @@ export default function Login({ with_errors, status, canResetPassword }) {
                 </div>
                 <div>
                     <p className="text-xs text-gray-400">
-                        By logging in, I agree to the Privacy Policy and consent
-                        to the collection, storage and use of my personal data
-                        as described in that policy.
+                        By logging in, I agree to the{" "}
+                        <a
+                            href={route("privacy-policy")}
+                            target="__blank"
+                            className="text-blue-500 hover:underline"
+                        >
+                            Privacy Policy
+                        </a>
+                        and consent to the collection, storage and use of my
+                        personal data as described in that policy.
                     </p>
                 </div>
             </div>
